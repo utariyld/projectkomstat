@@ -14,137 +14,443 @@ library(lmtest) # Untuk uji Durbin-Watson (autokorelasi)
 
 # --- CSS Kustom dengan Tema Pink & Hijau Modern ---
 custom_css <- "
-  /* Warna Dasar */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+  
+  /* Warna Dasar dengan Palet Modern */
   :root {
-    --primary-green: #4CAF50; /* Hijau Utama, untuk status 'success' atau tombol utama */
-    --light-green: #E8F5E9;  /* Hijau Muda, untuk latar belakang terang */
-    --accent-pink: #F06292;  /* Pink Akses, untuk highlight, hover */
-    --light-pink: #FFEBEE;   /* Pink Sangat Muda, untuk latar belakang sangat terang */
-    --dark-grey-text: #333333; /* Warna teks umum */
-    --light-grey-text: #666666; /* Warna teks sekunder */
+    --primary-green: #10B981; /* Emerald-500 - Hijau modern yang vibrant */
+    --secondary-green: #065F46; /* Emerald-900 - Hijau gelap untuk kontras */
+    --light-green: #D1FAE5; /* Emerald-100 - Hijau sangat terang */
+    --accent-green: #34D399; /* Emerald-400 - Hijau accent */
+    
+    --primary-pink: #EC4899; /* Pink-500 - Pink modern yang vibrant */
+    --secondary-pink: #BE185D; /* Pink-700 - Pink gelap */
+    --light-pink: #FCE7F3; /* Pink-100 - Pink sangat terang */
+    --accent-pink: #F472B6; /* Pink-400 - Pink accent */
+    
+    --gradient-primary: linear-gradient(135deg, #10B981 0%, #EC4899 100%);
+    --gradient-light: linear-gradient(135deg, #D1FAE5 0%, #FCE7F3 100%);
+    --gradient-dark: linear-gradient(135deg, #065F46 0%, #BE185D 100%);
+    
+    --text-primary: #1F2937; /* Gray-800 */
+    --text-secondary: #6B7280; /* Gray-500 */
+    --text-light: #9CA3AF; /* Gray-400 */
+    --white: #FFFFFF;
+    --surface: #F9FAFB; /* Gray-50 */
+    --border-light: #E5E7EB; /* Gray-200 */
+    
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   }
 
-  /* Header Dashboard */
+  /* Body dan Layout Umum */
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--surface);
+    color: var(--text-primary);
+  }
+
+  /* Header Dashboard dengan Gradient Modern */
   .main-header .logo {
-    font-family: 'Montserrat', sans-serif; /* Font modern */
-    font-weight: bold;
-    font-size: 24px;
-    color: var(--dark-grey-text); /* Warna teks untuk logo */
-    background-color: var(--light-green); /* Latar belakang logo */
-    border-bottom: 1px solid var(--primary-green);
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--white);
+    background: var(--gradient-primary);
+    border: none;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
   }
+  
   .main-header .navbar {
-    background-color: var(--primary-green); /* Latar belakang navbar */
-    color: white; /* Warna teks di navbar */
+    background: var(--gradient-primary);
+    border: none;
+    box-shadow: var(--shadow-lg);
   }
+  
   .main-header .navbar .sidebar-toggle {
-    color: white; /* Warna ikon toggle sidebar */
+    color: var(--white);
+    border: none;
+    transition: all 0.2s ease;
+  }
+  
+  .main-header .navbar .sidebar-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
   }
 
-  /* Sidebar */
+  /* Sidebar Modern dengan Glass Effect */
   .main-sidebar {
-    background-color: var(--light-green); /* Latar belakang sidebar */
-    color: var(--dark-grey-text);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-right: 1px solid var(--border-light);
+    box-shadow: var(--shadow-xl);
   }
+  
   .sidebar-menu > li.header {
-    background-color: var(--primary-green); /* Header menu sidebar */
-    color: white;
-    font-weight: bold;
-    padding: 10px 15px;
+    background: var(--gradient-primary);
+    color: var(--white);
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 15px 20px;
+    margin: 0;
+    border-radius: 0;
   }
+  
   .sidebar-menu li a {
-    font-size: 16px;
-    color: var(--dark-grey-text); /* Warna teks menu item */
-    border-left: 3px solid transparent; /* Garis samping default */
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    border-left: 4px solid transparent;
+    margin: 2px 8px;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 12px 16px;
   }
+  
   .sidebar-menu li a:hover {
-    background-color: var(--light-pink); /* Hover background */
-    color: var(--accent-pink); /* Hover text color */
+    background: var(--gradient-light);
+    color: var(--primary-green);
+    border-left-color: var(--primary-pink);
+    transform: translateX(4px);
+    box-shadow: var(--shadow-md);
   }
+  
   .sidebar-menu li.active > a {
-    background-color: var(--light-pink); /* Latar belakang item aktif */
-    color: var(--accent-pink); /* Warna teks item aktif */
-    border-left-color: var(--accent-pink); /* Garis samping item aktif */
-    font-weight: bold;
+    background: var(--gradient-light);
+    color: var(--primary-green);
+    border-left-color: var(--primary-pink);
+    font-weight: 600;
+    box-shadow: var(--shadow-md);
+  }
+  
+  .sidebar-menu .treeview-menu > li > a {
+    margin-left: 20px;
+    font-size: 14px;
+    opacity: 0.8;
   }
 
-  /* Konten Box */
+  /* Box Components dengan Design System Modern */
+  .box {
+    border-radius: 16px;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    background: var(--white);
+  }
+  
+  .box:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+  
   .box.box-solid.box-primary > .box-header {
-    background-color: var(--primary-green) !important; /* Header box primary */
-    color: white;
-    border-color: var(--primary-green) !important;
+    background: var(--gradient-primary) !important;
+    color: var(--white);
+    border: none !important;
+    padding: 20px 24px;
   }
+  
   .box.box-solid.box-primary {
-    border-top-color: var(--primary-green);
+    border: 1px solid var(--border-light);
   }
+  
   .box-title {
-    font-weight: bold;
-    color: white; /* Warna teks judul box */
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--white);
+    letter-spacing: -0.025em;
   }
-  .box-body { /* Target body dari shinydashboard box */
-    overflow-x: hidden; /* <-- MODIFIED: Changed from 'auto' to 'hidden' */
-    overflow-y: visible; /* Pastikan konten vertikal tidak tersembunyi, atau auto jika ingin scrollbar */
-    padding: 15px; /* Sedikit padding di dalam box body */
-  }
-
-  /* Output Teks (Interpretasi) */
-  .shiny-text-output {
-    white-space: pre-wrap; /* Memastikan teks membungkus */
-    word-wrap: break-word; /* Memastikan kata panjang pecah */
-    overflow: auto; /* Tambahkan scrollbar jika konten melebihi batas */
-    max-height: 200px; /* Batasi tinggi maksimum untuk interpretasi */
-    min-height: 50px; /* Pastikan ada tinggi minimum */
-    padding: 10px; /* Tambahkan padding agar teks tidak menempel border */
-    border: 1px solid var(--light-green); /* Border hijau muda */
-    background-color: var(--light-pink); /* Latar belakang pink muda */
-    border-radius: 5px; /* Sedikit sudut membulat */
-    color: var(--dark-grey-text);
-    margin-top: 10px; /* Jarak dari elemen sebelumnya */
+  
+  .box-body {
+    padding: 24px;
+    background: var(--white);
   }
 
-  /* Tombol */
+  /* Cards dan Content Areas */
+  .content-wrapper {
+    background: var(--surface);
+    min-height: 100vh;
+  }
+  
+  .content {
+    padding: 20px;
+  }
+
+  /* Input dan Form Elements */
+  .form-control {
+    border: 2px solid var(--border-light);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    background: var(--white);
+  }
+  
+  .form-control:focus {
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    outline: none;
+  }
+  
+  .form-group label {
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+
+  /* Buttons dengan Gradient dan Hover Effects */
+  .btn {
+    font-weight: 500;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-size: 14px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    cursor: pointer;
+    text-transform: none;
+    letter-spacing: 0.025em;
+  }
+  
   .btn-primary {
-    background-color: var(--accent-pink); /* Warna tombol primary */
-    border-color: var(--accent-pink);
-    color: white;
+    background: var(--gradient-primary);
+    color: var(--white);
+    box-shadow: var(--shadow-md);
   }
+  
   .btn-primary:hover, .btn-primary:focus {
-    background-color: #E91E63; /* Pink lebih gelap saat hover/focus */
-    border-color: #E91E63;
+    background: linear-gradient(135deg, #059669 0%, #DB2777 100%);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    color: var(--white);
   }
+  
   .btn-success {
-    background-color: var(--primary-green); /* Jika ada tombol success */
-    border-color: var(--primary-green);
-    color: white;
+    background: linear-gradient(135deg, var(--primary-green) 0%, var(--accent-green) 100%);
+    color: var(--white);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .btn-info {
+    background: linear-gradient(135deg, var(--primary-pink) 0%, var(--accent-pink) 100%);
+    color: var(--white);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
   }
 
-  /* Input File */
-  .form-group.shiny-input-container.shiny-input-container-file .input-group .form-control {
-    color: var(--dark-grey-text);
+  /* File Input Modern */
+  .form-group.shiny-input-container.shiny-input-container-file {
+    background: var(--light-green);
+    border: 2px dashed var(--primary-green);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
   }
+  
+  .form-group.shiny-input-container.shiny-input-container-file:hover {
+    border-color: var(--primary-pink);
+    background: var(--light-pink);
+  }
+  
   .form-group.shiny-input-container.shiny-input-container-file .btn {
-    background-color: var(--primary-green);
-    border-color: var(--primary-green);
-    color: white;
-  }
-  .form-group.shiny-input-container.shiny-input-container-file .btn:hover {
-    background-color: var(--darker-green); /* Definisi warna lebih gelap jika diperlukan */
-    border-color: var(--darker-green);
+    background: var(--gradient-primary);
+    border: none;
+    color: var(--white);
+    font-weight: 500;
   }
 
-  /* Elemen h4 */
-  h4 {
-    color: var(--dark-grey-text);
-    margin-top: 20px;
-    margin-bottom: 10px;
+  /* Output Areas */
+  .shiny-text-output {
+    background: var(--gradient-light);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 20px;
+    font-family: 'Inter', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-primary);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-height: 300px;
+    overflow-y: auto;
+    box-shadow: var(--shadow-sm);
   }
+  
+  .shiny-text-output::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .shiny-text-output::-webkit-scrollbar-track {
+    background: var(--border-light);
+    border-radius: 3px;
+  }
+  
+  .shiny-text-output::-webkit-scrollbar-thumb {
+    background: var(--primary-green);
+    border-radius: 3px;
+  }
+
+  /* Typography Modern */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+  
+  h4 {
+    font-size: 16px;
+    margin: 24px 0 12px 0;
+    color: var(--secondary-green);
+  }
+  
+  p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  
   hr {
-    border-top: 1px solid var(--primary-green);
+    border: none;
+    height: 1px;
+    background: var(--gradient-primary);
+    margin: 24px 0;
+    opacity: 0.3;
+  }
+
+  /* Table Styling */
+  .dataTables_wrapper {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  
+  table.dataTable {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  
+  table.dataTable thead th {
+    background: var(--gradient-primary);
+    color: var(--white);
+    font-weight: 600;
+    padding: 16px;
+    border: none;
+  }
+  
+  table.dataTable tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-light);
+  }
+  
+  table.dataTable tbody tr:hover {
+    background: var(--light-green);
+  }
+
+  /* Tab Panels */
+  .nav-tabs {
+    border-bottom: 2px solid var(--border-light);
+    margin-bottom: 20px;
+  }
+  
+  .nav-tabs > li > a {
+    border: none;
+    border-radius: 12px 12px 0 0;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-right: 4px;
+    transition: all 0.2s ease;
+  }
+  
+  .nav-tabs > li.active > a,
+  .nav-tabs > li.active > a:hover,
+  .nav-tabs > li.active > a:focus {
+    background: var(--gradient-primary);
+    color: var(--white);
+    border: none;
+  }
+  
+  .nav-tabs > li > a:hover {
+    background: var(--light-green);
+    color: var(--primary-green);
+    border: none;
+  }
+
+  /* Animations dan Transitions */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .box {
+    animation: fadeInUp 0.5s ease-out;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .box-body {
+      padding: 16px;
+    }
+    
+    .content {
+      padding: 12px;
+    }
+    
+    .btn {
+      padding: 10px 20px;
+      font-size: 13px;
+    }
+  }
+
+  /* Loading States */
+  .shiny-output-error {
+    background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
+    border: 1px solid #F87171;
+    color: #DC2626;
+    border-radius: 12px;
+    padding: 16px;
+    font-weight: 500;
+  }
+  
+  /* Custom Scrollbar untuk seluruh aplikasi */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--surface);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--gradient-primary);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--gradient-dark);
   }
 "
 
 ui <- dashboardPage(
-  dashboardHeader(title = "Analisis Data (LiteraNusa)",
+  dashboardHeader(title = "✨ LiteraNusa Analytics",
                   titleWidth = 280,
                   tags$li(class = "dropdown",
                           tags$style(HTML(custom_css)) # Memanggil CSS di sini
@@ -152,22 +458,26 @@ ui <- dashboardPage(
   dashboardSidebar(
     width = 280, # Menyesuaikan lebar sidebar untuk mencegah pemotongan
     sidebarMenu(
-      menuItem("Beranda", tabName = "beranda", icon = icon("home")),
-      menuItem("Manajemen Data", tabName = "manajemen_data", icon = icon("cogs")),
-      menuItem("Eksplorasi Data", tabName = "eksplorasi", icon = icon("chart-bar")),
-      menuItem("Uji Asumsi", tabName = "uji_asumsi", icon = icon("flask")),
-      menuItem("Statistik Inferensial", icon = icon("calculator"),
-               menuSubItem("Uji Beda Rata-rata", tabName = "uji_rata_rata"),
-               menuSubItem("Uji Proporsi & Varians", tabName = "uji_prop_var")),
-      menuItem("ANOVA", tabName = "anova", icon = icon("balance-scale")),
-      menuItem("Regresi Linear Berganda", tabName = "regresi", icon = icon("line-chart")),
+      menuItem("🏠 Beranda", tabName = "beranda", icon = icon("home")),
+      menuItem("🔧 Manajemen Data", tabName = "manajemen_data", icon = icon("database")),
+      menuItem("📊 Eksplorasi Data", tabName = "eksplorasi", icon = icon("chart-line")),
+      menuItem("🧪 Uji Asumsi", tabName = "uji_asumsi", icon = icon("flask")),
+      menuItem("📈 Statistik Inferensial", icon = icon("calculator"),
+               menuSubItem("🔍 Uji Beda Rata-rata", tabName = "uji_rata_rata"),
+               menuSubItem("📊 Uji Proporsi & Varians", tabName = "uji_prop_var")),
+      menuItem("⚖️ ANOVA", tabName = "anova", icon = icon("balance-scale")),
+      menuItem("📉 Regresi Linear", tabName = "regresi", icon = icon("chart-area")),
       hr(), # Garis pemisah
-      h4("  Upload Data", style = "margin-left: 15px;"),
-      fileInput("upload_file", "Pilih File CSV",
-                accept = c("text/csv",
-                           "text/comma-separated-values,text/plain",
-                           ".csv")),
-      checkboxInput("header", "Header", TRUE)
+      div(style = "margin: 20px 15px; padding: 20px; background: linear-gradient(135deg, #D1FAE5 0%, #FCE7F3 100%); border-radius: 12px; border: 2px dashed #10B981;",
+          h4("📁 Upload Data", style = "margin: 0 0 15px 0; color: #065F46; text-align: center; font-size: 16px;"),
+          fileInput("upload_file", NULL,
+                    placeholder = "Pilih File CSV",
+                    accept = c("text/csv",
+                               "text/comma-separated-values,text/plain",
+                               ".csv")),
+          div(style = "text-align: center;",
+              checkboxInput("header", "File memiliki header", TRUE))
+      )
     )
   ),
   dashboardBody(
@@ -175,12 +485,74 @@ ui <- dashboardPage(
       # --- Beranda ---
       tabItem(tabName = "beranda",
               fluidRow(
-                box(title = "Selamat Datang di Dashboard Analisis Data", status = "primary", solidHeader = TRUE, width = 12,
-                    p("Dashboard ini dirancang untuk membantu Anda dalam menganalisis data secara komprehensif, mulai dari manajemen data, eksplorasi, uji asumsi, hingga statistik inferensial dan regresi."),
-                    h4("Metadata dan Informasi:"),
-                    p("Aplikasi ini dibangun menggunakan R Shiny, sebuah framework web aplikasi untuk R. Fungsionalitas statistik didukung oleh berbagai paket R standar."),
-                    p("Data awal yang tersedia adalah 'sovi_data.csv' dan 'distance.csv'."),
-                    p("Untuk memulai, Anda dapat menggunakan data yang tersedia atau mengunggah dataset Anda sendiri melalui panel di samping.")
+                box(title = "🎯 Selamat Datang di LiteraNusa Analytics", status = "primary", solidHeader = TRUE, width = 12,
+                    div(style = "text-align: center; padding: 20px;",
+                        h3("Platform Analisis Data Statistik Modern", style = "color: #065F46; margin-bottom: 20px;"),
+                        p("Dashboard canggih untuk analisis data komprehensif dengan antarmuka yang intuitif dan visualisasi yang menarik", 
+                          style = "font-size: 16px; color: #6B7280; margin-bottom: 30px;")
+                    )
+                )
+              ),
+              fluidRow(
+                box(title = "📊 Fitur Utama", status = "primary", solidHeader = TRUE, width = 4,
+                    div(style = "padding: 10px;",
+                        tags$ul(
+                          tags$li("📁 Manajemen Data Interaktif", style = "margin-bottom: 8px;"),
+                          tags$li("📈 Eksplorasi Data Visual", style = "margin-bottom: 8px;"),
+                          tags$li("🧪 Uji Asumsi Statistik", style = "margin-bottom: 8px;"),
+                          tags$li("📉 Analisis Inferensial", style = "margin-bottom: 8px;"),
+                          tags$li("🔗 Regresi Linear Berganda", style = "margin-bottom: 8px;")
+                        )
+                    )
+                ),
+                box(title = "🛠️ Teknologi", status = "primary", solidHeader = TRUE, width = 4,
+                    div(style = "padding: 10px;",
+                        p("🔧 Framework: R Shiny", style = "margin-bottom: 8px;"),
+                        p("📦 Paket Statistik: psych, car, DT", style = "margin-bottom: 8px;"),
+                        p("📊 Visualisasi: ggplot2", style = "margin-bottom: 8px;"),
+                        p("🎨 UI: shinydashboard", style = "margin-bottom: 8px;"),
+                        p("✨ Design: Modern CSS3", style = "margin-bottom: 8px;")
+                    )
+                ),
+                box(title = "🚀 Panduan Cepat", status = "primary", solidHeader = TRUE, width = 4,
+                    div(style = "padding: 10px;",
+                        p("1️⃣ Upload data CSV Anda", style = "margin-bottom: 8px;"),
+                        p("2️⃣ Eksplorasi data di tab Eksplorasi", style = "margin-bottom: 8px;"),
+                        p("3️⃣ Jalankan uji asumsi", style = "margin-bottom: 8px;"),
+                        p("4️⃣ Lakukan analisis statistik", style = "margin-bottom: 8px;"),
+                        p("5️⃣ Download hasil analisis", style = "margin-bottom: 8px;")
+                    )
+                )
+              ),
+              fluidRow(
+                box(title = "📋 Data Tersedia", status = "primary", solidHeader = TRUE, width = 6,
+                    div(style = "padding: 15px;",
+                        h4("Dataset Default:", style = "color: #EC4899; margin-bottom: 15px;"),
+                        div(style = "background: linear-gradient(135deg, #D1FAE5 0%, #FCE7F3 100%); padding: 15px; border-radius: 12px; margin-bottom: 10px;",
+                            strong("📊 sovi_data.csv"), br(),
+                            span("Dataset utama untuk analisis statistik", style = "color: #6B7280; font-size: 14px;")
+                        ),
+                        div(style = "background: linear-gradient(135deg, #D1FAE5 0%, #FCE7F3 100%); padding: 15px; border-radius: 12px;",
+                            strong("📏 distance.csv"), br(),
+                            span("Dataset jarak untuk analisis spasial", style = "color: #6B7280; font-size: 14px;")
+                        )
+                    )
+                ),
+                box(title = "💡 Tips Penggunaan", status = "primary", solidHeader = TRUE, width = 6,
+                    div(style = "padding: 15px;",
+                        div(style = "background: linear-gradient(135deg, #FCE7F3 0%, #D1FAE5 100%); padding: 15px; border-radius: 12px; margin-bottom: 10px;",
+                            strong("✅ Upload Data"), br(),
+                            span("Gunakan file CSV dengan header untuk hasil optimal", style = "color: #6B7280; font-size: 14px;")
+                        ),
+                        div(style = "background: linear-gradient(135deg, #FCE7F3 0%, #D1FAE5 100%); padding: 15px; border-radius: 12px; margin-bottom: 10px;",
+                            strong("📈 Visualisasi"), br(),
+                            span("Pilih jenis grafik yang sesuai dengan tipe data", style = "color: #6B7280; font-size: 14px;")
+                        ),
+                        div(style = "background: linear-gradient(135deg, #FCE7F3 0%, #D1FAE5 100%); padding: 15px; border-radius: 12px;",
+                            strong("📊 Interpretasi"), br(),
+                            span("Perhatikan interpretasi otomatis untuk setiap analisis", style = "color: #6B7280; font-size: 14px;")
+                        )
+                    )
                 )
               )
       ),
