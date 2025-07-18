@@ -46,10 +46,21 @@ custom_css <- "
   }
 
   /* Body dan Layout Umum */
-  body {
+  html, body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     background: var(--surface);
     color: var(--text-primary);
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: auto;
+  }
+  
+  /* Memastikan container utama menggunakan lebar penuh */
+  .wrapper, .main-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   /* Header Dashboard dengan Gradient Modern */
@@ -176,10 +187,27 @@ custom_css <- "
   .content-wrapper {
     background: var(--surface);
     min-height: 100vh;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
   }
   
   .content {
     padding: 20px;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+  
+  /* Memastikan main content menggunakan lebar penuh saat sidebar tertutup */
+  .sidebar-collapse .content-wrapper {
+    margin-left: 0 !important;
+  }
+  
+  /* Memastikan area utama dashboard menggunakan lebar penuh */
+  .main-content {
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   /* Input dan Form Elements */
@@ -401,6 +429,23 @@ custom_css <- "
   
   .box {
     animation: fadeInUp 0.5s ease-out;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  /* Memastikan fluidRow menggunakan lebar penuh */
+  .row {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+  
+  /* Memastikan container Bootstrap menggunakan lebar penuh */
+  .container-fluid {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
   }
   
   /* Responsive Design */
